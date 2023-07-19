@@ -130,8 +130,8 @@ sub load_loc {
     return $Loc{$pkg} if exists $Loc{$pkg};
 
     eval { require Locale::Maketext::Lexicon; 1 }   or return;
-    $Locale::Maketext::Lexicon::VERSION > 0.20	    or return;
-    eval { require File::Spec; 1 }		    or return;
+    $Locale::Maketext::Lexicon::VERSION > 0.20      or return;
+    eval { require File::Spec; 1 }                  or return;
 
     my $path = $args{Path} || $class->auto_path($args{Class}) or return;
     my $pattern = File::Spec->catfile($path, '*.[pm]o');
@@ -147,9 +147,9 @@ sub load_loc {
         use base 'Locale::Maketext';
         Locale::Maketext::Lexicon->import({
             'i-default' => [ 'Auto' ],
-            '*'	=> [ Gettext => \$pattern ],
-            _decode => \$decode,
-            _encoding => \$encoding,
+            '*'         => [ Gettext => \$pattern ],
+            _decode     => \$decode,
+            _encoding   => \$encoding,
         });
         *${pkg}::Lexicon = \\%${pkg}::i_default::Lexicon;
         *tense = sub { \$_[1] . ((\$_[2] eq 'present') ? 'ing' : 'ed') }
