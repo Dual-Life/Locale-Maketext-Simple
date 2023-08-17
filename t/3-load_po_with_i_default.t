@@ -1,10 +1,10 @@
 use strict;
 use warnings;
 use Test::More;
-use FindBin qw($Bin);
+use File::Basename qw(dirname);
 
 use Locale::Maketext::Simple (
-    Path => "$Bin/po_with_i_default",
+    Path => dirname(__FILE__) . '/po_with_i_default',
     Style => "gettext",
 );
 
