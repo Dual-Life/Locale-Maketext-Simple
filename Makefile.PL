@@ -64,6 +64,9 @@ $MM_ARGS{NO_MYMETA} = 1
   if $mymeta_broken;
 $MM_ARGS{META_ADD} = { 'meta-spec' => { version => 2 }, %META }
   unless -f 'META.yml';
+$MM_ARGS{PL_FILES} ||= {};
+$MM_ARGS{NORECURS} = 1
+  if not exists $MM_ARGS{NORECURS};
 $MM_ARGS{dist}{TARFLAGS} ||= '-c -v --format=ustar -f';
 
 for (qw(configure build test runtime)) {
