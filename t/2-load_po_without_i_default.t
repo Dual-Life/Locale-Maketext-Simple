@@ -10,12 +10,11 @@ use Locale::Maketext::Simple (
 
 eval {
     require Locale::Maketext::Lexicon;
-    die unless Locale::Maketext::Lexicon->VERSION(0.20);
-};
-if ($@) {
+    Locale::Maketext::Lexicon->VERSION(0.20);
+    1;
+} or do {
     plan skip_all => 'No soft dependencies, i_default will not work';
-    exit 0;
-}
+};
 
 plan tests => 5;
 
