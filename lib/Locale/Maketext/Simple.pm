@@ -4,6 +4,8 @@ $Locale::Maketext::Simple::VERSION = '0.21';
 use strict;
 use 5.005;
 
+use File::Spec;
+
 =head1 NAME
 
 Locale::Maketext::Simple - Simple interface to Locale::Maketext::Lexicon
@@ -131,7 +133,6 @@ sub load_loc {
 
     eval { require Locale::Maketext::Lexicon; 1 }   or return;
     $Locale::Maketext::Lexicon::VERSION > 0.20      or return;
-    eval { require File::Spec; 1 }                  or return;
 
     my $path = $args{Path} || $class->auto_path($args{Class}) or return;
     my $pattern = File::Spec->catfile($path, '*.[pm]o');

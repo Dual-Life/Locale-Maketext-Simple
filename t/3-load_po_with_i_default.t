@@ -10,7 +10,6 @@ use Locale::Maketext::Simple (
 eval {
     require Locale::Maketext::Lexicon;
     die unless Locale::Maketext::Lexicon->VERSION(0.20);
-    require File::Spec;
 };
 if ($@) {
     plan skip_all => 'No soft dependencies, i_default will not work';
