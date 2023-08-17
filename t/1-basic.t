@@ -1,4 +1,6 @@
 use strict;
+use warnings;
+
 use Test::More tests => 9;
 
 BEGIN {
@@ -10,11 +12,8 @@ use Locale::Maketext::Simple;
 ok(Locale::Maketext::Simple->VERSION);
 is(loc("Just [_1] Perl [_2]", qw(another hacker)), "Just another Perl hacker");
 
-{
-    local $^W; # shuts up 'redefined' warnings
-    Locale::Maketext::Simple->reload_loc;
-    Locale::Maketext::Simple->import(Style => 'gettext');
-}
+Locale::Maketext::Simple->reload_loc;
+Locale::Maketext::Simple->import(Style => 'gettext');
 
 is(loc("Just %1 Perl %2", qw(another hacker)), "Just another Perl hacker");
 ok(loc_lang('fr'));

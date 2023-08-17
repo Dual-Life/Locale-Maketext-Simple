@@ -1,10 +1,10 @@
 package Locale::Maketext::Simple;
-$Locale::Maketext::Simple::VERSION = '0.21';
-
 use strict;
-use 5.005;
+use warnings;
 
 use File::Spec;
+
+our $VERSION = '0.21';
 
 =head1 NAME
 
@@ -117,6 +117,7 @@ sub import {
     $loc ||= $class->default_loc(%args);
 
     no strict 'refs';
+    no warnings 'redefine';
     *{caller(0) . "::$args{Export}"} = $loc if $args{Export};
     *{caller(0) . "::$args{Export}_lang"} = $loc_lang || sub { 1 };
 }
