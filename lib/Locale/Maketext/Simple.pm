@@ -132,8 +132,13 @@ sub load_loc {
     my $pkg = join('::', grep { defined and length } $args{Class}, $args{Subclass});
     return $Loc{$pkg} if exists $Loc{$pkg};
 
-    eval { require Locale::Maketext::Lexicon; 1 }   or return;
-    $Locale::Maketext::Lexicon::VERSION > 0.20      or return;
+    eval {
+        local @INC = @INC;
+        pop @INC if $INC[-1] eq '.';
+        require Locale::Maketext::Lexicon;
+        Locale::Maketext::Lexicon->VERSION(0.20);
+        1;
+    } or return;
 
     my $path = $args{Path} || $class->auto_path($args{Class}) or return;
     my $pattern = File::Spec->catfile($path, '*.[pm]o');
